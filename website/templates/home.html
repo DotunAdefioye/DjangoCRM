@@ -21,18 +21,17 @@
     <br/>
         <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
-            <form>
+
               <div class="mb-3">
-                <label for="exampleInputusername1" class="form-label">User Name</label>
+                <label class="form-label">User Name</label>
                 <input type="username" class="form-control" name="username" required>
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <label class="form-label">Password</label>
                 <input type="password" class="form-control" name="password"  required>
               </div>
                 <br/>
               <button type="submit" class="btn btn-primary">Login</button>
-            </form>
         </form>
 </div>
 </body>

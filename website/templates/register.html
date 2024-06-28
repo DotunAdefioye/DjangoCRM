@@ -7,8 +7,16 @@
 </head>
 <body>
 {% block content %}
+<div class="col-md-6 offset-md-3">
 <H1> Registration</H1>
-
+    <br/>
+    <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+                <br/>
+              <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+</div>
 </body>
 </html>
 
