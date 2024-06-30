@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
+<body>
 {% block content %}
 
 {% if user.is_authenticated %}
 
-<div>Welcome back</div>
+<table class="table table-hover table-bordered ">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Id</th>
+        <th scope="col">Date Created</th>
+      <th scope="col"> Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Zipcode</th>
 
+    </tr>
+  </thead>
+  <tbody>
+ {% if records %}
+        {% for record in records %}
+        <tr>
+            <td><a href="{% url 'record' record.id %}"> {{ record.id }}</a> </td>
+            <td>{{ record.created_at }}</td>
+            <td>{{ record.first_name }} {{ record.last_name }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.phone_number }}</td>
+            <td>{{ record.address }}</td>
+            <td>{{ record.city }}</td>
+            <td>{{ record.state }}</td>
+            <td>{{ record.zipcode }}</td>
+
+
+        </tr>
+            <br/>
+        {% endfor %}
+    {% endif %}
+
+  </tbody>
+</table>
 {% else %}
-
-<body>
 <div class="col-md-6 offset-md-3">
-    <h1> Login </h1>
-    <br/>
-        <form method="POST" action="{% url 'home' %}">
-            {% csrf_token %}
 
-              <div class="mb-3">
-                <label class="form-label">User Name</label>
-                <input type="username" class="form-control" name="username" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password"  required>
-              </div>
-                <br/>
-              <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-</div>
-</body>
+    <h1>Login</h1>
+    <br/>
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">User Name</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
 {% endif %}
+
 {% endblock %}
+    </div>
+</body>
 </html>
